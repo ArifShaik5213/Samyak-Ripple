@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGM College Event Registrations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --primary-text: #333;
+            --secondary-bg: #f8f9fa;
+            --accent-color: #1877f2;
+        }
+
+        [data-theme="dark"] {
+            --primary-bg: #1a1a1a;
+            --primary-text: #ffffff;
+            --secondary-bg: #2d2d2d;
+            --accent-color: #1877f2;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* Facebook Blue Color */
+        .facebook-blue {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            background: var(--primary-bg);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .college-name {
+            text-align: center;
+            font-size: 1.8em;
+            color: var(--primary-text);
+            background: var(--primary-bg);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .college-name:hover {
+            background-color: var(--secondary-bg);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .college-info {
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--primary-text);
+            margin-top: 5px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .right-logos {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        img.logo {
+            width: 100px;
+            height: auto;
+        }
+
+        /* Scroll Bar */
+        .symposium-scroll {
+            background: var(--primary-bg);
+            height: 40px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Department of ECE */
+        .department-ece {
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--primary-text);
+            background: var(--primary-bg);
+            padding: 10px;
+            margin: 0;
+            border-radius: 5px;
+        }
+
+        /* Welcome to Ripple 2k25 */
+        .welcome-ripple {
+            position: relative;
+            text-align: center;
+            font-size: 2em;
+            color: var(--primary-text);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 10px;
+            background: var(--primary-bg);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* SAMYAK Styles */
+        .samyak {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 20px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Total Registrations */
+        .total-registrations {
+            background: var(--primary-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .total-registrations h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: var(--primary-text);
+        }
+
+        .total-registrations .count {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 10px 0;
+        }
+
+        /* Event Grid Container */
+        .event-grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Event Section */
+        .event-section {
+            background: var(--primary-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .event-item {
+            background: var(--secondary-bg);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-item h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        .event-item .count {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .event-grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer and Developer Credit Styles */
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--primary-bg);
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--primary-text);
+            border-radius: 5px;
+        }
+
+        .developer-credit {
+            margin-top: 10px;
+            background: var(--primary-bg);
+            padding: 8px 16px;
+            border-radius: 5px;
+            display: none;
+            font-size: 0.9em;
+            color: var(--primary-text);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .developer-credit.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="rgm.png" alt="RGM Logo">
+        <div class="college-name">
+            <div style="font-size: 1.1em;">Rajeev Gandhi Memorial College Of Engineering and Technology</div>
+            <div style="font-size: 0.9em; color: var(--accent-color);">[Autonomous]</div>
+            <div class="college-info" style="font-size: 0.6em;">Nandyal, A.P, INDIA</div>
+        </div>
+        <div class="right-logos">
+            <img class="logo" src="samyak.jpeg" alt="Samyak Logo">
+            <img class="logo" src="ece.jpeg" alt="ECE Logo">
+        </div>
+    </header>
+
+    <div class="symposium-scroll">
+        <marquee style="color: var(--accent-color);">XXI National Level Technical Symposium ⚡</marquee>
+    </div>
+
+    <div class="department-ece">Department of Electronics and Communication Engineering</div>
+
+    <div class="welcome-ripple">
+        <div class="theme-toggle">
+            <i class="fas fa-moon" id="theme-toggle-icon"></i>
+        </div>
+        <span>Welcome to Ripple 2K25</span>
+    </div>
+
+    <div class="samyak">SAMYAK</div>
+
+    <div class="container">
+        <div class="total-registrations">
+            <h3 class="facebook-blue">TOTAL REGISTRATIONS</h3>
+            <div class="count" id="total-registrations-count">0</div>
+        </div>
+
+        <div class="event-grid-container">
+            <div class="event-section">
+                <h2 class="section-title facebook-blue">Technical Events</h2>
+                <div class="event-grid">
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Paper Presentation</h3>
+                        <div class="count">Registrations: <span id="Paper Presentation-count">106</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Poster Presentation</h3>
+                        <div class="count">Registrations: <span id="Poster Presentation-count">30</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">3D Tech Vista</h3>
+                        <div class="count">Registrations: <span id="3D Tech Vista-count">38</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Innovation Contest</h3>
+                        <div class="count">Registrations: <span id="Innovation Contest-count">40</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Mind Mashup</h3>
+                        <div class="count">Registrations: <span id="Mind Mashup-count">105</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Circuit Mastermind</h3>
+                        <div class="count">Registrations: <span id="Circuit Mastermind-count">90</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Code Clash</h3>
+                        <div class="count">Registrations: <span id="Code Clash-count">27</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Project Expo</h3>
+                        <div class="count">Registrations: <span id="Project Expo-count">33</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-section">
+                <h2 class="section-title facebook-blue">Non-Technical Events</h2>
+                <div class="event-grid">
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Dance Arena</h3>
+                        <div class="count">Registrations: <span id="Dance Arena-count">15</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Fashion Dynasty</h3>
+                        <div class="count">Registrations: <span id="Fashion Dynasty-count">18</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Treasure Hunt</h3>
+                        <div class="count">Registrations: <span id="Treasure Hunt-count">45</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Snap Sketch</h3>
+                        <div class="count">Registrations: <span id="Snap Sketch-count">12</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Cam Shot</h3>
+                        <div class="count">Registrations: <span id="Cam Shot-count">17</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Chess</h3>
+                        <div class="count">Registrations: <span id="Chess-count">14</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Online Gaming</h3>
+                        <div class="count">Registrations: <span id="Online Gaming-count">48</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Carroms</h3>
+                        <div class="count">Registrations: <span id="Carroms-count">46</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Ludo</h3>
+                        <div class="count">Registrations: <span id="Ludo-count">19</span></div>
+                    </div>
+                    <div class="event-item">
+                        <h3 class="facebook-blue">Squid Game</h3>
+                        <div class="count">Registrations: <span id="Squid Game-count">39</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 RGMCET. All rights reserved.</p>
+        <div class="developer-credit">
+            <p>Developed by S Mohammed Arif</p>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const body = document.body;
+
+        function toggleTheme() {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggleIcon.classList.remove('fa-sun');
+                themeToggleIcon.classList.add('fa-moon');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggleIcon.classList.remove('fa-moon');
+                themeToggleIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeToggleIcon.classList.add('fa-sun');
+            themeToggleIcon.classList.remove('fa-moon');
+        }
+
+        // Add event listener for theme toggle
+        themeToggleIcon.addEventListener('click', () => {
+            toggleTheme();
+            localStorage.setItem('theme', body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+        });
+
+        // Calculate total registrations
+        function calculateTotalRegistrations() {
+            let total = 0;
+            const counts = document.querySelectorAll('.event-item .count span');
+            counts.forEach(count => {
+                total += parseInt(count.innerText);
+            });
+            document.getElementById('total-registrations-count').innerText = total;
+        }
+
+        // Show/hide developer credit based on scroll
+        let lastScroll = 0;
+        const developerCredit = document.querySelector('.developer-credit');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                developerCredit.classList.add('show');
+            } else {
+                developerCredit.classList.remove('show');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Initialize total registrations
+        calculateTotalRegistrations();
+    </script>
+</body>
+</html>
